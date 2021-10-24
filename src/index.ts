@@ -6,9 +6,7 @@ window.addEventListener("load", function () {
     const room = new Room("#svg", 800, 600);
     const name = localStorage.getItem("name");
     m.register(room);
-    m.onEnterRoom = (selfId, peers)=>{
-        room.addValidAvatorId(selfId);
-        peers.forEach(p=>room.addValidAvatorId(p.id));
+    m.onEnterRoom = selfId=>{
         const avator = room.newAvator(
             selfId,
             name != null ? name : "匿名",
@@ -33,11 +31,5 @@ window.addEventListener("load", function () {
             }
             lastClick = t;
         });
-    };
-    m.onPeerJoin = peerId=>{
-        room.addValidAvatorId(peerId);
-    };
-    m.onPeerLeave = peerId=>{
-        room.removeValidAvatorId(peerId);
     };
 });

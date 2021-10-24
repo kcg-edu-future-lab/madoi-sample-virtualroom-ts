@@ -1,6 +1,6 @@
-import { Container, Circle, G, Text, SVG, Image } from '@svgdotjs/svg.js'
+import { Container, Circle, G, Text, SVG } from '@svgdotjs/svg.js'
 import '@svgdotjs/svg.draggable.js'
-import { GetState, SetState, Share } from './madoi/madoi';
+import { EnterRoom, GetState, PeerJoin, PeerLeave, SetState, Share } from './madoi/madoi';
 
 export class Room {
     private container: Container;
@@ -12,11 +12,19 @@ export class Room {
         this.container.size(width, height);
     }
 
-    addValidAvatorId(peerId: string){
+    @EnterRoom()
+    enterRoom(selfPeerId: string, peers: {id: string, order: number}[]){
+        this.peerJoin(selfPeerId);
+        peers.forEach(p=>this.peerJoin(p.id));
+    }
+
+    @PeerJoin()
+    peerJoin(peerId: string){
         this.validAvatorIds.add(peerId);
     }
 
-    removeValidAvatorId(peerId: string){
+    @PeerLeave()
+    peerLeave(peerId: string){
         this.validAvatorIds.delete(peerId);
         const a = this.avators.get(peerId);
         if(a){

@@ -18,10 +18,26 @@ export declare function GetState(config?: GetStateConfig): (target: any, name: s
 export interface SetStateConfig {
 }
 export declare function SetState(config?: SetStateConfig): (target: any, name: string, descriptor: PropertyDescriptor) => void;
+export interface EnterRoomConfig {
+}
+export declare function EnterRoom(config?: EnterRoomConfig): (target: any, name: string, descriptor: PropertyDescriptor) => void;
+export interface LeaveRoomConfig {
+}
+export declare function LeaveRoom(config?: LeaveRoomConfig): (target: any, name: string, descriptor: PropertyDescriptor) => void;
+export interface PeerJoinConfig {
+}
+export declare function PeerJoin(config?: PeerJoinConfig): (target: any, name: string, descriptor: PropertyDescriptor) => void;
+export interface PeerLeaveConfig {
+}
+export declare function PeerLeave(config?: PeerLeaveConfig): (target: any, name: string, descriptor: PropertyDescriptor) => void;
 export interface MethodConfig {
     share?: ShareConfig;
     getState?: GetStateConfig;
     setState?: SetStateConfig;
+    enterRoom?: EnterRoomConfig;
+    leaveRoom?: LeaveRoomConfig;
+    peerJoin?: PeerJoinConfig;
+    peerLeave?: PeerLeaveConfig;
 }
 interface PeerInfo {
     id: string;
@@ -32,6 +48,10 @@ export interface MethodAndConfigParam {
     share?: ShareConfig;
     getState?: GetStateConfig;
     setState?: SetStateConfig;
+    enterRoom?: EnterRoomConfig;
+    leaveRoom?: LeaveRoomConfig;
+    peerJoin?: PeerJoinConfig;
+    peerLeave?: PeerLeaveConfig;
 }
 export declare class Madoi {
     private connecting;
@@ -40,6 +60,10 @@ export declare class Madoi {
     private sharedObjects;
     private getStateMethods;
     private setStateMethods;
+    private enterRoomMethods;
+    private leaveRoomMethods;
+    private peerJoinMethods;
+    private peerLeaveMethods;
     private promises;
     private changedObjects;
     private handlers;
